@@ -19,10 +19,4 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   -interpro **Interpro scan tsv file**
   
-  -p **rtPCRInput**, the RT-PCR proportions file
-  
-  -s **PathToSamplesFolder**, the salmon input folder
-  
-  -w **Match window size**, this is the wondow size that the RT-PCR/transcript product matching algorithm uses. For BaRTv2.0 it was set to 6.
-  
   -o $output, The output path and prefix

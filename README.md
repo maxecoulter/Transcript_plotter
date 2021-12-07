@@ -4,6 +4,10 @@ Transcript plotter is a tool for visualising predicted protein domains and varia
 
 ### Overview
 
+![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/BaRT2v18chr3HG123000_with_domains.eps)
+
+
+
 
 
 The tool is currently based around a python script that generates inputs that can be used in a shiny app. 

@@ -11,11 +11,13 @@ Genes can produce multiple transcripts with multiple isoforms. Advances in Iso-s
 
 ![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/BaRT2v18chr3HG123000_with_domains.png)
 
-All transcripts in a gene can be visualised with predicted protein domains, to assess how transcript diversity is affecting protein diversity
+All transcripts in a gene can be visualised with predicted protein domains, to assess how transcript diversity is affecting protein diversity.
+
+
 
 ![Figure 2](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/Cellulose%20synthase.png)
 
-Single transcripts can be visualised as above. You can visualise SnpEff data on individual transcripts
+Single transcripts can be visualised as above. You can visualise SnpEff data on individual transcripts.
 
 
 

@@ -58,17 +58,17 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
  * **InterProScan (Optional)**
 
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Gene3D	G3DSA:1.10.510.10	Transferase(Phosphotransferase) domain 1	365	580	7.60E-59	T	01/11/2021	-	-
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF13855	Leucine rich repeat	102	161	1.30E-07	T	01/11/2021	IPR001611	Leucine-rich repeat
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF08263	Leucine rich repeat N-terminal domain	35	74	7.60E-11	T	01/11/2021	IPR013210	Leucine-rich repeat-containing N-terminal, plant-type
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSitePatterns	PS00107	Protein kinases ATP-binding region signature.	294	316	-	T	01/11/2021	IPR017441	Protein kinase, ATP binding site
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	PANTHER	PTHR47988	SOMATIC EMBRYOGENESIS RECEPTOR KINASE 1	6	613	0	T	01/11/2021	-	-
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSitePatterns	PS00108	Serine/Threonine protein kinases active-site signature.	411	423	-	T	01/11/2021	IPR008271	Serine/threonine-protein kinase, active site
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	PANTHER	PTHR47988:SF2	PROTEIN NSP-INTERACTING KINASE 3	6	613	0	T	01/11/2021	-	-
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF00069	Protein kinase domain	289	558	1.30E-42	T	01/11/2021	IPR000719	Protein kinase domain
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	SUPERFAMILY	SSF52058	L domain-like	35	202	5.33E-35	T	01/11/2021	-	-
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Gene3D	G3DSA:3.30.200.20	Phosphorylase Kinase; domain 1	259	364	6.50E-34	T	01/11/2021	-	-
-      BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSiteProfiles	PS50011	Protein kinase domain profile.	288	571	35.255	T	01/11/2021	IPR000719	Protein kinase domain
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Gene3D	G3DSA:1.10.510.10	Transferase(Phosphotransferase) domain 1	365	580	7.60E-59	T	01/11/2021	-	-
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF13855	Leucine rich repeat	102	161	1.30E-07	T	01/11/2021	IPR001611	Leucine-rich repeat
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF08263	Leucine rich repeat N-terminal domain	35	74	7.60E-11	T	01/11/2021	IPR013210	Leucine-rich repeat-containing N-terminal, plant-type
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSitePatterns	PS00107	Protein kinases ATP-binding region signature.	294	316	-	T	01/11/2021	IPR017441	Protein kinase, ATP binding site
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	PANTHER	PTHR47988	SOMATIC EMBRYOGENESIS RECEPTOR KINASE 1	6	613	0	T	01/11/2021	-	-
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSitePatterns	PS00108	Serine/Threonine protein kinases active-site signature.	411	423	-	T	01/11/2021	IPR008271	Serine/threonine-protein kinase, active site
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	PANTHER	PTHR47988:SF2	PROTEIN NSP-INTERACTING KINASE 3	6	613	0	T	01/11/2021	-	-
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF00069	Protein kinase domain	289	558	1.30E-42	T	01/11/2021	IPR000719	Protein kinase domain
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	SUPERFAMILY	SSF52058	L domain-like	35	202	5.33E-35	T	01/11/2021	-	-
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Gene3D	G3DSA:3.30.200.20	Phosphorylase Kinase; domain 1	259	364	6.50E-34	T	01/11/2021	-	-
+        BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	ProSiteProfiles	PS50011	Protein kinase domain profile.	288	571	35.255	T	01/11/2021	IPR000719	Protein kinase domain
 
 
   * This file is required for visualising predicted protein domains on your transcripts

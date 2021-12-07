@@ -34,9 +34,9 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
 * The script takes as a main transcriptome input either a .gtf file, or a .bed file 
 
 
-  -gtf **/path/to/GTF file** 
+  -gtf **/path/to/mytranscriptome.gtf** 
   
-  -bed **/path/to/Bed file**
+  -bed **/path/to/mytranscriptome.bed**
 
   -c **Coordinates**, The region of interest. This is optional, but I suggest you use this otherwise you will have a huge list of genes to visualise. Format is <chromosome>,<start>,<end>
   

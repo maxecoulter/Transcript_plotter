@@ -4,9 +4,9 @@ Transcript plotter is a tool for visualising predicted protein domains and varia
 
 ### Overview
 
-Genes can produce multiple transcripts with multiple isoforms. It is helpful to visualise RNA-seq data in the context of genes and transcripts. Transcript plotter is a tool for visualising genes, transcripts, predicted protein domains and variant calling. This can help you better understand expression changes at the transcript level (AS, DTU etc.), and so the tool goes hand in hand with transcriptome based RNA-seq quantification using Salmon/Kallisto. 
+Genes can produce multiple transcripts with multiple isoforms. Advances in Iso-seq and nanopore technology mean we can now sequence whole transcripts. This is great, but the resulting data can be very complex. It is helpful to visualise RNA-seq data in the context of genes and transcripts. Transcript plotter is a tool for visualising genes, transcripts, predicted protein domains and variant calling. This can help you better understand expression changes at the transcript level (AS, DTU etc.), and so the tool goes hand in hand with transcriptome based RNA-seq quantification using Salmon/Kallisto. 
 
-Advances in Iso-seq and nanopore technology mean we can now sequence whole transcripts
+
 
 
 ![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/BaRT2v18chr3HG123000_with_domains.png)

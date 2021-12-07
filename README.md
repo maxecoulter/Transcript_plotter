@@ -4,7 +4,9 @@ Transcript plotter is a tool for visualising predicted protein domains and varia
 
 ### Overview
 
-![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/BaRT2v18chr3HG123000_with_domains.eps)
+![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/Cellulose%20synthase.png)
+
+* single transcripts can be visualised as above
 
 
 

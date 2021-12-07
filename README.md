@@ -9,7 +9,9 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
 
 * The python script is written in python 3.8. It does not require any packages to be installed
 
+
 * The script takes as a main transcriptome input either a .gtf file, or a .bed file 
+
 
   -gtf **/path/to/GTF file** 
   
@@ -19,4 +21,20 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   -interpro **Interpro scan tsv file**
   
-  -o $output, The output path and prefix
+  -snpeff **SnpEff vcf file**
+  
+  -o $output, **outfile (must specify as .R). Default is "gene_models.R". All other files will be written to the directory the R script is in.**
+  
+  
+### Detailed information on inputs:
+  
+  * -gtf
+  
+    chr1H	PBRI	exon	72060	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	five_prime_utr	72060	72209	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	CDS	72210	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	start_codon	72210	72212	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	exon	72524	73355	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	CDS	72524	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+    chr1H	PBRI	stop_codon	72568	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+

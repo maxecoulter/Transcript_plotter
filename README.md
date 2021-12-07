@@ -4,9 +4,18 @@ Transcript plotter is a tool for visualising predicted protein domains and varia
 
 ### Overview
 
-![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/Cellulose%20synthase.png)
+Genes can produce multiple transcripts with multiple isoforms. It is helpful to visualise RNA-seq data in the context of genes and transcripts. Transcript plotter is a tool for visualising genes, transcripts, predicted protein domains and variant calling. This can help you better understand expression changes at the transcript level (AS, DTU etc.), and so the tool goes hand in hand with transcriptome based RNA-seq quantification using Salmon/Kallisto. 
 
-* single transcripts can be visualised as above
+Advances in Iso-seq and nanopore technology mean we can now sequence whole transcripts
+
+
+![Figure 1](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/BaRT2v18chr3HG123000_with_domains.png)
+
+All transcripts in a gene can be visualised with predicted protein domains, to assess how transcript diversity is affecting protein diversity
+
+![Figure 2](https://github.com/maxecoulter/Transcript_plotter/blob/master/Figures/Cellulose%20synthase.png)
+
+Single transcripts can be visualised as above. You can visualise SnpEff data on individual transcripts
 
 
 
@@ -134,6 +143,19 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   
   ## Shiny app
+  
+  You can use the shiny app to generate a variety of gene/transcript plots. You can adjust legend size, plot size, axis text size etc. You can download the plots to eps format. Have a play! Some known glitches:
+  
+  * If you change the plot size, it will spread out the domain key. Simply turn domains on and off again, should fix
+  
+  * Not possible to display snpeff data on transcripts without interpro domains, if you have **genemodel_input_domain.csv** loaded. If you want to do this, restart the app and don't load **genemodel_input_domain.csv*
+  
+  * Everytime you press the domain button, it will change the colours of the domains. This is a quick way of visualising the data. However, if you download the plot it will also change the colours, so they won't be the same. You will need to put the colours in manually in order to make sure they stay the same in your final plot!
+  
+  * You need to input the correct number of manual colours for the number of domains. This is the number of domains you see in the key excluding CDS and UTR (these always have the same colour). If you input the wrong number the plot will not display
+  
+  
+  * Please let me know if you find any bugs or have any problems (mecoulter@dundee.ac.uk). Enjoy!
   
   
 

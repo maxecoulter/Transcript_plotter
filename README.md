@@ -32,7 +32,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
 ### Detailed information on inputs:
   
-* **Gtf example**
+### **Gtf example**
   
       chr1H PBRI	exon	72060	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
       chr1H	PBRI	five_prime_utr	72060	72209	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
@@ -44,7 +44,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
 
 * Note transcript_id and then gene_id
   
-* **Bed example**
+### **Bed example**
   
       chr1H	366145087	366145296	BaRT2v18chr1HG024650;BaRT2v18chr1HG024650.1	.	+	366145098	366145296	255,0,0	1	209	0
       chr1H	491055869	491064771	BaRT2v18chr1HG043310;BaRT2v18chr1HG043310.1	.	+	491055915	491064496	255,0,0	2	969,321	0,8581
@@ -56,7 +56,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
  
  * Inputs are both optional, you only need one or the other
   
- * **InterProScan (Optional)**
+ ### **InterProScan (Optional)**
 
         BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Gene3D	G3DSA:1.10.510.10	Transferase(Phosphotransferase) domain 1	365	580	7.60E-59	T	01/11/2021	-	-
         BaRT2v18chr3HG122880.8	e0c507447a8cc27375bf2ecb1307867f	613	Pfam	PF13855	Leucine rich repeat	102	161	1.30E-07	T	01/11/2021	IPR001611	Leucine-rich repeat
@@ -79,7 +79,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   * There maybe some domains you do not wish to display. In which case, you can easily adjust the output csv file **genemodel_input_domain.csv**, which feeds into the shiny app
   
-  * **SnpEff vcf file (Optional)**
+ ### **SnpEff vcf file (Optional)**
   
  * You will need a .vcf file as produced by snpeff (see http://pcingola.github.io/SnpEff/) 
   

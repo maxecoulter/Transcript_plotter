@@ -32,7 +32,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
 ### Detailed information on inputs:
   
-### **Gtf example**
+### **Gtf**
   
       chr1H PBRI	exon	72060	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
       chr1H	PBRI	five_prime_utr	72060	72209	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
@@ -44,7 +44,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
 
 * Note transcript_id and then gene_id
   
-### **Bed example**
+### **Bed**
   
       chr1H	366145087	366145296	BaRT2v18chr1HG024650;BaRT2v18chr1HG024650.1	.	+	366145098	366145296	255,0,0	1	209	0
       chr1H	491055869	491064771	BaRT2v18chr1HG043310;BaRT2v18chr1HG043310.1	.	+	491055915	491064496	255,0,0	2	969,321	0,8581

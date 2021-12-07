@@ -1,4 +1,4 @@
-# Transcript_plotter
+# Transcript plotter
 
 Transcript plotter is a tool for visualising predicted protein domains and variants in the context of genes and transcripts. You can produce publication quality figures for understanding both how transcript variation is affecting downstream protein function and also how variants are affecting your transcripts. 
 

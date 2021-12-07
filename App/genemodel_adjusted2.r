@@ -1,8 +1,8 @@
-#'genemodel.plot
-#'
-#' This function plots a gene model
+#Code for trancsript_plotter.
 
-#' Max Coulter added some extra functionality (1/11/21)
+#Original transcript code developed by J Grey Munroe (https://cran.r-project.org/web/packages/genemodel/index.html)
+
+# Max Coulter added functions to display interproscan domains and multiple transcripts simultaneously.
 
 
 

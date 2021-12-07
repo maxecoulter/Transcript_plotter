@@ -28,13 +28,13 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
 ### Detailed information on inputs:
   
-  * -gtf
+* -gtf
   
-    chr1H	PBRI	exon	72060	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	five_prime_utr	72060	72209	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	CDS	72210	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	start_codon	72210	72212	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	exon	72524	73355	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	CDS	72524	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
-    chr1H	PBRI	stop_codon	72568	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H PBRI	exon	72060	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	five_prime_utr	72060	72209	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	CDS	72210	72399	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	start_codon	72210	72212	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	exon	72524	73355	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	CDS	72524	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
+      chr1H	PBRI	stop_codon	72568	72570	.	+	.	transcript_id "BaRT2v18chr1HG000020.1"; gene_id "BaRT2v18chr1HG000020";
 

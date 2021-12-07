@@ -146,7 +146,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   ## Shiny app
   
-  You can use the shiny app to generate a variety of gene/transcript plots. You can adjust legend size, plot size, axis text size etc. You can download the plots to eps format. Have a play! Some known glitches:
+  You can use the shiny app to generate a variety of gene/transcript plots. Simply download the input files. The interProScan and snpeff files are optional. You can adjust legend size, plot size, axis text size etc. You can download the plots to eps format. Have a play! Some known glitches:
   
   * If you change the plot size, it will spread out the domain key. Simply turn domains on and off again, should fix
   

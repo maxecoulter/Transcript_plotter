@@ -150,7 +150,7 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   
   * If you change the plot size, it will spread out the domain key. Simply turn domains on and off again, should fix
   
-  * Not possible to display snpeff data on transcripts without interpro domains, if you have **genemodel_input_domain.csv** loaded. If you want to do this, restart the app and don't load **genemodel_input_domain.csv*
+  * Not possible to display snpeff data on transcripts without interpro domains, if you have **genemodel_input_domain.csv** loaded. If you want to do this, restart the app and don't load **genemodel_input_domain.csv**
   
   * Everytime you press the domain button, it will change the colours of the domains. This is a quick way of visualising the data. However, if you download the plot it will also change the colours, so they won't be the same. You will need to put the colours in manually in order to make sure they stay the same in your final plot!
   

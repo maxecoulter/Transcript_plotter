@@ -13,6 +13,7 @@ class Bed:
 	genestrand = {}
 	genestarts = {}
 	geneends = {}
+	genechromosome = {}
 	def __init__(self, line, locus=[]):
 		self.line = line
 		self.fields = line.strip("\n").split("\t")
@@ -39,6 +40,7 @@ class Bed:
 		self.b_Instances[self.transcript] = self
 		self.gene_transcripts.setdefault(self.gene, []).append(self.transcript)
 		self.genestrand[self.gene] = self.strand
+		self.genechromosome[self.gene] = self.chromosome
 		try:
 			gene_start = self.genestarts[self.gene]
 			if self.start < gene_start:
@@ -361,6 +363,7 @@ class Gtf(Bed):
 	genestarts = {}
 	geneends = {}
 	genestrand = {}
+	genechromosome = {}
 	transcript_starts = {}
 	transcript_ends = {}
 	transcript_CDS_starts = {}
@@ -389,6 +392,7 @@ class Gtf(Bed):
 				self.transcript = self.info_split[i].split('"')[-2]
 				break
 		self.gene = self.transcript.split(".")[0]
+		self.genechromosome[self.gene] = self.chromosome
 		self.line = line
 		self.gtfentries.append(self)
 		self.Instances.setdefault(self.gene,[]).append(self)
@@ -654,11 +658,11 @@ def labels(impact,label):
 
 
 
-def write_R_script(Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype):
+def write_R_script(outdir, Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype):
 	"""Put entries in format for R genemodel"""
-	with open(Routfile, "w") as Rout, open("Shiny_out.csv", "w") as shinyout, open("snpeff_out.csv","w") as snpeffout:
+	with open(outdir + Routfile, "w") as Rout, open(outdir + "Shiny_out.csv", "w") as shinyout, open(outdir + "snpeff_out.csv","w") as snpeffout:
 		#
-		shinyout.write("gene, start, end, orientation\n")
+		shinyout.write("gene, start, end, orientation, chromosome\n")
 		snpeffout.write("Transcript,position_start, position_end, label, depth, colour\n")
 		
 
@@ -682,12 +686,13 @@ def write_R_script(Routfile, gene_output, domain_output, snpeff, annotation, int
 		for gene, transcripts in annotation.gene_transcripts.items():
 			gene_start = annotation.genestarts[gene]
 			gene_end = annotation.geneends[gene]
+			chromosome = annotation.genechromosome[gene]
 			orientation = "forward" if annotation.genestrand[gene] == "+" else "reverse"
 			Rout.write(f"#Working on {gene}\n\n\n")
 			Rout.write(f"gene <- transcripts %>% filter(gene == '{gene}')\n\n")
 			Rout.write(f"gene.transcript.model.plot(model=gene, gene_start={gene_start}, gene_bpstop={gene_end}, orientation='{orientation}', xaxis=T, gap=0.2)\n\n")
 			#
-			shinyout.write(f"{gene},{gene_start},{gene_end},{orientation}\n")
+			shinyout.write(f"{gene},{gene_start},{gene_end},{orientation},{chromosome}\n")
 			
 			Rout.write("#Note: gap parameter must be the same for both gene and g_domains\n\n")
 			Rout.write(f"g_domains <- domains %>% filter(gene == '{gene}')\n")
@@ -808,7 +813,7 @@ def main():
 	#
 	print("Writing R script and csvs files")
 	#
-	write_R_script(args.Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype)
+	write_R_script(outdir, args.Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype)
 	#	
 	print("Script finished")
 

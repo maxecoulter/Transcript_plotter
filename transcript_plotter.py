@@ -660,7 +660,7 @@ def labels(impact,label):
 
 def write_R_script(outdir, Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype):
 	"""Put entries in format for R genemodel"""
-	with open(outdir + Routfile, "w") as Rout, open(outdir + "Shiny_out.csv", "w") as shinyout, open(outdir + "snpeff_out.csv","w") as snpeffout:
+	with open(Routfile, "w") as Rout, open(outdir + "Shiny_out.csv", "w") as shinyout, open(outdir + "snpeff_out.csv","w") as snpeffout:
 		#
 		shinyout.write("gene, start, end, orientation, chromosome\n")
 		snpeffout.write("Transcript,position_start, position_end, label, depth, colour\n")
@@ -748,8 +748,10 @@ def main():
 		sys.exit()
 
 
-
-	locus = args.coordinates.split(",")#3H locus boundaries on 3H
+	if args.coordinates:
+		locus = args.coordinates.split(",")#3H locus boundaries on 3H
+	else:
+		locus = []
 	#
 	#Outfiles:
 	if len(args.Routfile.split("/")) == 1:#No /
@@ -772,11 +774,13 @@ def main():
 			if line.startswith("#"):
 				continue
 			#print(line)
-			chromosome, position = line.rstrip().split("\t")[0:2]
-			if chromosome != locus[0]:
-				continue
-			if int(position) < int(locus[1]) or int(position) > int(locus[2]):#ONly include snps in 3H locus
-				continue
+			
+			if locus:
+				chromosome, position = line.rstrip().split("\t")[0:2]
+				if chromosome != locus[0]:
+					continue
+				if int(position) < int(locus[1]) or int(position) > int(locus[2]):#ONly include snps in 3H locus
+					continue
 			snpeff = SnpEff(line)
 		#
 		snpeff.clean_up_annotations_transcript()

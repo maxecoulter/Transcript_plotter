@@ -581,7 +581,7 @@ Transcript.model.browser.plot<-function(model, gene_info, max_transcripts, gene_
     next_gene <- stringr::str_split_fixed(next_transcript,"\\.",2)[1]
     
     
-    if (gene == next_gene | gene_info[next_gene,"overlap"]==TRUE){
+    if (gene == next_gene | gene_info[gene,"overlap"]==TRUE){
       plot_bottom <- plot_bottom - 0.2 - gap
       plot_top <- plot_top - 0.2 - gap
       xaxis=FALSE
@@ -601,7 +601,7 @@ t_no <- function(t){
 
 
 
-Transcript.Browser <- function(gene_info,
+Transcript.Browser <- function(filtered_genes,
                                transcripts,
                                plot_start,
                                plot_end,
@@ -628,7 +628,7 @@ Transcript.Browser <- function(gene_info,
   # gene_info$overlap <- unlist(overlaps)
   
   
-  filtered_genes <- gene_info %>% filter(end > plot_start) %>% filter(start < plot_end)
+  #filtered_genes <- gene_info %>% filter(end > plot_start) %>% filter(start < plot_end)
   
   transcripts_filtered <- transcripts %>% filter(gene %in% filtered_genes$gene)
   nrow

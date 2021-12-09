@@ -4,7 +4,7 @@ library(stringr)
 library(Cairo)
 options(shiny.usecairo=T)
 
-
+options(shiny.maxRequestSize=500*1024^2)
 
 
 
@@ -49,10 +49,9 @@ overlap_info <- function(gene_info){
   previous_start <- 0
   previous_end <- 0
   #gene_info <- gene_info %>% arrange(start)
+  
   for (i in 2:nrow(gene_info)){
-    print(i)
-    print(paste0("Previous end: ",previous_end))
-    print(paste0("This end:", gene_info[i,2]))
+   
     if (gene_info[i,2] <= previous_end){
       overlaps[i-1] <- T
     }else{
@@ -65,15 +64,18 @@ overlap_info <- function(gene_info){
   overlaps[i] <- F
   
   gene_info$overlap <- unlist(overlaps)
-  print(gene_info$overlap)
+  
+  
+  
   gene_info
 }
 
 fig_res <- 200 #Figure resolution
 
 
-ui <- fluidPage(sidebarLayout(
-  sidebarPanel(
+ui <- fluidPage(
+  sidebarLayout(
+  sidebarPanel("Download input files",
     fileInput("input", "Choose CSV file for genemodel input (genemodel_input.csv)", accept = ".csv"),
     fileInput("shiny_input", "Choose CSV file for transcript information (shiny_out.csv)", accept = ".csv"),
     fileInput("domain_input", "Choose CSV file for interproscan input (optional, genemodel_input_domain.csv)", accept = ".csv"),
@@ -130,14 +132,23 @@ ui <- fluidPage(sidebarLayout(
   mainPanel(
     selectInput(inputId = "chromosome", 
                 label = "Choose a chromosome", choices = chromosome_choice),
+    fluidRow(
+      column(3,
     selectInput(inputId = "gene", 
-                label = "Choose a gene", choices = gene_choice),
+                label = "Choose a gene", choices = gene_choice)),
+      column(3, selectInput(inputId = "browser_gene", 
+                            label = "Genes in browser window", choices = gene_choice)),
+      column(3,actionButton(inputId="browser_gene_button", label = "Go to gene"))),
     
-    tags$div(numericInput("browser_start", "Start", 0, min = 0, max = NA, step = 10, width= 200),  style="display:inline-block"),
+    tags$div(numericInput("browser_start", "Start", 0, min = 0, max = NA, step = 10, width= 200), style="display:inline-block"),
     tags$div(numericInput("browser_end", "End", 0, min = 0, max = NA, step = 10,  width= 200),  style="display:inline-block"),
     
+    
     plotOutput("browser_plot", width=700, height=400),
+  
     br(),
+    br(),
+    
     br(),
    
     
@@ -212,9 +223,10 @@ server <- function(input, output){
    gene_info_all <- read.csv(shiny$datapath)
    rownames(gene_info_all) <- gene_info_all$gene
    chromosome_choice <- gene_info_all %>% pull(chromosome) %>% unique()
-   
    updateSelectInput(inputId='chromosome', label = "Choose a chromosome", choices = chromosome_choice,
                      selected = NULL)
+   observe({
+   
    
    
    gene_info <- gene_info_all %>% filter(chromosome == input$chromosome)
@@ -231,6 +243,12 @@ server <- function(input, output){
    
    
    transcripts <- transcripts_all %>% filter(gene %in% rownames(gene_info))
+   start <- list()
+   for (i in 1:nrow(transcripts)){
+     start[i] <- stringr::str_split_fixed(transcripts[i,"transcript_coordinates"],"-",2)[1]
+   }
+   transcripts$start <- unlist(start)
+   transcripts <- transcripts %>% arrange(start)
    gene_choice <- as.list(unique(rownames(gene_info)))
    
    updateSelectInput(inputId='gene', label = "Choose a gene", choices = gene_choice,
@@ -256,12 +274,31 @@ server <- function(input, output){
     first_start <- gene_info[input$gene,"start"]
     first_end <- gene_info[input$gene,"end"]
     updateNumericInput(session = getDefaultReactiveDomain(), inputId='browser_start', "Start", first_start, min = 0, max = NA, step = 10)
-    updateNumericInput(session = getDefaultReactiveDomain(), inputId='browser_end', "End", first_end, min = 0, max = NA, step = 10)})
+    updateNumericInput(session = getDefaultReactiveDomain(), inputId='browser_end', "End", first_end, min = 0, max = NA, step = 10)
+    
+   
+    })
   
+  
+  
+  browser_genes <- reactive({gene_info %>% filter(end > input$browser_start) %>% filter(start < input$browser_end)})
+  
+  
+  observeEvent(input$browser_gene_button,{
+    updateSelectInput(inputId='gene', label = "Choose a gene", choices = gene_choice,
+                      selected = input$browser_gene)
+  })
   
   output$browser_plot <- renderPlot({
-    Transcript.Browser(gene_info=gene_info, transcripts=transcripts,
+    Transcript.Browser(filtered_genes=browser_genes(), transcripts=transcripts,
                                                         plot_start=input$browser_start,plot_end=input$browser_end,legend_gap=input$browserzoom)}, width= 700, height= 400, res = fig_res)
+  #browser()
+  observe({
+    browser_genes_g <- browser_genes() %>% pull(gene) %>% as.vector()
+  #
+  updateSelectInput(inputId='browser_gene', label = "Genes in browser window", choices = browser_genes_g,
+                    selected = NULL)})
+  
   
   
   output$gene_plot <- renderPlot({plotInput()}, width=function() input$width, height=function() input$height, res = fig_res)
@@ -471,7 +508,7 @@ server <- function(input, output){
   })
   
  })})})
-
+   })
  })
 })
 }

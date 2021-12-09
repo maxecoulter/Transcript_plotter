@@ -24,7 +24,9 @@ Single transcripts can be visualised as above. You can visualise SnpEff data on 
 
 
 The tool is currently based around a python script that generates inputs that can be used in a shiny app. 
-The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter/.
+The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter_v2/.
+
+
 
 ## transcript_plotter.py
 
@@ -149,6 +151,8 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   You can use the shiny app to generate a variety of gene/transcript plots. Simply download the input files. The interProScan and snpeff files are optional. You can adjust legend size, plot size, axis text size etc. You can download the plots to eps format. Have a play! Some known glitches:
   
   * If you change the plot size, it will spread out the domain key. Simply turn domains on and off again, should fix
+  
+  * If you move on to the next gene the domain key from the previous will still be there. Just switch domains on and off again...
   
   * Not possible to display snpeff data on transcripts without interpro domains, if you have **genemodel_input_domain.csv** loaded. If you want to do this, restart the app and don't load **genemodel_input_domain.csv**
   

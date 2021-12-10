@@ -109,6 +109,16 @@ class Bed:
 		with open(output, "a") as out:
 			features_dict = {}
 			bed = self.b_Instances[transcript]
+			if bed.strand == "+":
+				orientation = "forward"
+			elif bed.strand == "-":
+				orientation = "reverse"
+			else:
+				print("fatal strand error")
+				sys.exit()
+			gene_start = self.genestarts[gene]
+			gene_end = self.geneends[gene]
+			
 			
 			#
 			#First generate exon coordinates (relative start)
@@ -121,7 +131,7 @@ class Bed:
 			
 			if bed.CDS_start == bed.start and bed.CDS_end == bed.end:#Assumes no CDS
 				for feature, coordinates in features_dict.items():
-					[out.write(f"{gene},{transcript},{bed.start + 1}-{bed.end},{feature},{coordinate}\n") for coordinate in coordinates]
+					[out.write(f"{gene},{transcript},{bed.start + 1}-{bed.end},{feature},{coordinate},{gene_start},{gene_end},{orientation},{bed.chromosome}\n") for coordinate in coordinates]
 				return bed.start, bed.end
 			else:
 				#5' UTR coordinates (with gaps for introns)
@@ -161,8 +171,8 @@ class Bed:
 				#Write outputs
 				
 				for feature, coordinates in features_dict.items():
-					[out.write(f"{gene},{transcript},{bed.start + 1}-{bed.end},{feature},{coordinate}\n") for coordinate in coordinates]
-			#
+					[out.write(f"{gene},{transcript},{bed.start + 1}-{bed.end},{feature},{coordinate},{gene_start},{gene_end},{orientation},{bed.chromosome}\n") for coordinate in coordinates]
+			#gene,transcript,transcript_coordinates,type,coordinates,start, end, orientation, chromosome
 			
 			#
 		return bed.start, bed.end
@@ -497,6 +507,17 @@ class Gtf(Bed):
 		with open(output, "a") as out:
 			transcript_start = self.transcript_starts[transcript] - 1
 			genestrand = self.genestrand[gene]
+			#
+			if genestrand == "+":
+				orientation = "forward"
+			elif genestrand == "-":
+				orientation = "reverse"
+			else:
+				print("Fatal strand error")
+				sys.exit()
+			chromosome = self.genechromosome[gene]
+			gene_start = self.genestarts[gene]
+			gene_end = self.geneends[gene]
 			transcript_end = self.transcript_ends[transcript] + 1
 			strand_start = transcript_start if genestrand == "+" else transcript_end
 			exons = []
@@ -511,7 +532,7 @@ class Gtf(Bed):
 					exons.append((start, end))
 				try:
 					feature = genemodel_conversion[gtf_line.type]
-					out.write(f"{gene},{transcript},{transcript_start}-{transcript_end},{feature},{start}-{end}\n")
+					out.write(f"{gene},{transcript},{transcript_start}-{transcript_end},{feature},{start}-{end},{gene_start},{gene_end},{orientation},{chromosome}\n")
 				except KeyError:
 					print(f"No availability for category {gtf_line.type}")
 					continue
@@ -521,9 +542,10 @@ class Gtf(Bed):
 				if not previous_exon:
 					previous_exon = exon[1]
 				else:
-					out.write(f"{gene},{transcript},{transcript_start}-{transcript_end},intron,{previous_exon + 1}-{exon[0] - 1}\n")
+					out.write(f"{gene},{transcript},{transcript_start}-{transcript_end},intron,{previous_exon + 1}-{exon[0] - 1},{gene_start},{gene_end},{orientation},{chromosome}\n")
 					previous_exon = exon[1]
 		return transcript_start, transcript_end
+		##gene,transcript,transcript_coordinates,type,coordinates,start, end, orientation, chromosome
 
 
 
@@ -660,14 +682,14 @@ def labels(impact,label):
 
 def write_R_script(outdir, Routfile, gene_output, domain_output, snpeff, annotation, interproscan, filetype):
 	"""Put entries in format for R genemodel"""
-	with open(Routfile, "w") as Rout, open(outdir + "Shiny_out.csv", "w") as shinyout, open(outdir + "snpeff_out.csv","w") as snpeffout:
+	with open(Routfile, "w") as Rout, open(outdir + "snpeff_out.csv","w") as snpeffout:
 		#
-		shinyout.write("gene, start, end, orientation, chromosome\n")
+		
 		snpeffout.write("Transcript,position_start, position_end, label, depth, colour\n")
 		
 
 		with open(gene_output, "w") as out:
-			out.write("gene,transcript,transcript_coordinates,type,coordinates\n")
+			out.write("gene,transcript,transcript_coordinates,type,coordinates,start, end, orientation, chromosome\n")
 		#
 		if interproscan:
 			with open(domain_output, "w") as out:
@@ -692,7 +714,7 @@ def write_R_script(outdir, Routfile, gene_output, domain_output, snpeff, annotat
 			Rout.write(f"gene <- transcripts %>% filter(gene == '{gene}')\n\n")
 			Rout.write(f"gene.transcript.model.plot(model=gene, gene_start={gene_start}, gene_bpstop={gene_end}, orientation='{orientation}', xaxis=T, gap=0.2)\n\n")
 			#
-			shinyout.write(f"{gene},{gene_start},{gene_end},{orientation},{chromosome}\n")
+			
 			
 			Rout.write("#Note: gap parameter must be the same for both gene and g_domains\n\n")
 			Rout.write(f"g_domains <- domains %>% filter(gene == '{gene}')\n")

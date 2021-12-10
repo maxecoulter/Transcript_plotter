@@ -2,6 +2,8 @@
 library(dplyr)
 library(stringr)
 library(Cairo)
+library(shinycssloaders)
+library(shinyWidgets)
 options(shiny.usecairo=T)
 
 options(shiny.maxRequestSize=500*1024^2)
@@ -77,7 +79,7 @@ ui <- fluidPage(
   sidebarLayout(
   sidebarPanel("Download input files",
     fileInput("input", "Choose CSV file for genemodel input (genemodel_input.csv)", accept = ".csv"),
-    fileInput("shiny_input", "Choose CSV file for transcript information (shiny_out.csv)", accept = ".csv"),
+    #fileInput("shiny_input", "Choose CSV file for transcript information (shiny_out.csv)", accept = ".csv"),
     fileInput("domain_input", "Choose CSV file for interproscan input (optional, genemodel_input_domain.csv)", accept = ".csv"),
     fileInput("snpeff_input", "Choose CSV file for snpeff input (optional, snpeff_out.csv)", accept = ".csv"),
     br(),
@@ -144,8 +146,8 @@ ui <- fluidPage(
     tags$div(numericInput("browser_end", "End", 0, min = 0, max = NA, step = 10,  width= 200),  style="display:inline-block"),
     
     
-    plotOutput("browser_plot", width=700, height=400),
-  
+    plotOutput("browser_plot", width=700, height=400) %>% withSpinner(color="#3ea4c4"),
+    
     br(),
     br(),
     
@@ -165,7 +167,7 @@ ui <- fluidPage(
                 actionButton(inputId="button", label = "Add domains"),
                 actionButton(inputId="off_button", label = "Remove domains"),
                 
-              
+                pickerInput("multi_transcripts","Choose transcripts to display", choices=c("New Mexico", "Colorado", "California"), options = list(`actions-box` = TRUE),multiple = T),
                 plotOutput("gene_plot", width=500, height=400),
                 downloadButton("download"),
                 br(),
@@ -215,46 +217,58 @@ ui <- fluidPage(
 
 
 server <- function(input, output){
+  
  observeEvent(input$input,{
-   observeEvent(input$shiny_input,{
+   
+   #observeEvent(input$shiny_input,{
    infile <- input$input
    transcripts_all <- read.csv(infile$datapath)
-   shiny <- input$shiny_input
-   gene_info_all <- read.csv(shiny$datapath)
-   rownames(gene_info_all) <- gene_info_all$gene
-   chromosome_choice <- gene_info_all %>% pull(chromosome) %>% unique()
+   #shiny <- input$shiny_input
+   #gene_info_all <- read.csv(shiny$datapath)
+   #rownames(gene_info_all) <- gene_info_all$gene
+   #chromosome_choice <- gene_info_all %>% pull(chromosome) %>% unique()
+   chromosome_choice <- transcripts_all %>% pull(chromosome) %>% unique()
    updateSelectInput(inputId='chromosome', label = "Choose a chromosome", choices = chromosome_choice,
                      selected = NULL)
    observe({
    
    
    
-   gene_info <- gene_info_all %>% filter(chromosome == input$chromosome)
+   #gene_info <- gene_info_all %>% filter(chromosome == input$chromosome)
+   transcripts <- transcripts_all %>% filter(chromosome == input$chromosome)
    if (input$chromosome=="NA"){
-     gene_info <- gene_info_all %>% filter(chromosome == chromosome_choice[1])
-     gene_info <- gene_info %>% arrange(start) %>% overlap_info()
-   }else{
-     gene_info <- gene_info %>% arrange(start) %>% overlap_info()
+     transcripts <- transcripts_all %>% filter(chromosome == chromosome_choice[1])
+     #gene_info <- gene_info_all %>% filter(chromosome == chromosome_choice[1])
      
    }
+   # else{
+   #   gene_info <- gene_info %>% arrange(start) %>% overlap_info()
+   #   
+   # }
    
+   gene_info_d <- transcripts %>% select(gene,start,end,orientation)
+   gene_info <- gene_info_d[!duplicated(gene_info_d), ]#remove duplicates
+   gene_info <- gene_info %>% arrange(start) %>% overlap_info()
+   rownames(gene_info) <- gene_info$gene
    #browser()
    
    
    
-   transcripts <- transcripts_all %>% filter(gene %in% rownames(gene_info))
+   #transcripts <- transcripts_all %>% filter(gene %in% rownames(gene_info))
    start <- list()
    for (i in 1:nrow(transcripts)){
      start[i] <- stringr::str_split_fixed(transcripts[i,"transcript_coordinates"],"-",2)[1]
    }
-   transcripts$start <- unlist(start)
-   transcripts <- transcripts %>% arrange(start)
+   transcripts$t_start <- unlist(start)
+   transcripts <- transcripts %>% arrange(t_start)
    gene_choice <- as.list(unique(rownames(gene_info)))
    
    updateSelectInput(inputId='gene', label = "Choose a gene", choices = gene_choice,
                      selected = NULL)
    
-   data<- reactive({transcripts %>% filter(gene == input$gene)})
+   data2<- reactive({transcripts %>% filter(gene == input$gene)})
+   
+   
    
    
    
@@ -262,6 +276,9 @@ server <- function(input, output){
 
   #data2 <- reactive({transcripts_test() %>% filter(gene == input$gene)})
   transcript_vector <- reactive({transcripts %>% filter(gene == input$gene) %>% pull(transcript) %>% unique() %>% as.vector()})
+ observe({
+  updatePickerInput(session=getDefaultReactiveDomain() ,inputId="multi_transcripts",label="Choose transcripts to display", selected=transcript_vector(),choices=transcript_vector(), options = list(`actions-box` = TRUE))
+ })
   
   #g_domains <- eventReactive(input$button, {domains %>% filter(gene == input$gene)})
   
@@ -291,7 +308,7 @@ server <- function(input, output){
   
   output$browser_plot <- renderPlot({
     Transcript.Browser(filtered_genes=browser_genes(), transcripts=transcripts,
-                                                        plot_start=input$browser_start,plot_end=input$browser_end,legend_gap=input$browserzoom)}, width= 700, height= 400, res = fig_res)
+                                                       plot_start=input$browser_start,plot_end=input$browser_end,legend_gap=input$browserzoom)}, width= 700, height= 400, res = fig_res)
   #browser()
   observe({
     browser_genes_g <- browser_genes() %>% pull(gene) %>% as.vector()
@@ -299,7 +316,8 @@ server <- function(input, output){
   updateSelectInput(inputId='browser_gene', label = "Genes in browser window", choices = browser_genes_g,
                     selected = NULL)})
   
-  
+  data <- reactive({print("Filtering data based on multitranscripts")
+    data2() %>% filter(transcript %in% input$multi_transcripts)})
   
   output$gene_plot <- renderPlot({plotInput()}, width=function() input$width, height=function() input$height, res = fig_res)
   download_plot <- function(plotInput){downloadHandler(
@@ -336,7 +354,7 @@ server <- function(input, output){
     g_domains <- domains %>% filter(gene == input$gene)
     plotInput_domain <- function() {gene.transcript.model.plot(model=data(), gene_start=gene_info[input$gene,"start"],gene_bpstop=gene_info[input$gene,"end"], orientation=gene_info[input$gene,"orientation"],xaxis=T, gap=0.2, legend_gap=input$legend_gap,axis_text_size=input$axis_text_size)
       gene.transcript.model.plot_domain(model=g_domains, 
-                                        transcript_vector=transcript_vector(), gene_start=gene_info[input$gene,"start"], gene_bpstop=gene_info[input$gene,"end"], orientation=gene_info[input$gene,"orientation"], gap=0.2, legend_gap=input$legend_gap, legend_size = input$legend_size)
+                                        transcript_vector=input$multi_transcripts, gene_start=gene_info[input$gene,"start"], gene_bpstop=gene_info[input$gene,"end"], orientation=gene_info[input$gene,"orientation"], gap=0.2, legend_gap=input$legend_gap, legend_size = input$legend_size)
       }
     output$gene_plot <- renderPlot({plotInput_domain()
     },width=function() input$width, height=function() input$height, res = fig_res)
@@ -509,7 +527,7 @@ server <- function(input, output){
   
  })})})
    })
- })
+ #})
 })
 }
 

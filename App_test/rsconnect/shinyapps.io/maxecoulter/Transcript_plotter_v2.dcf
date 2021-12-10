@@ -5,9 +5,9 @@ account: maxecoulter
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5298745
-bundleId: 5350552
+bundleId: 5356084
 url: https://maxecoulter.shinyapps.io/Transcript_plotter_v2/
-when: 1639059439.7035
-lastSyncTime: 1639059439.70351
+when: 1639152064.66067
+lastSyncTime: 1639152064.66069
 asMultiple: FALSE
 asStatic: FALSE

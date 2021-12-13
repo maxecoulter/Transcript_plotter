@@ -159,6 +159,8 @@ The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter
   * Everytime you press the domain button, it will change the colours of the domains. This is a quick way of visualising the data. However, if you download the plot it will also change the colours, so they won't be the same. You will need to put the colours in manually in order to make sure they stay the same in your final plot!
   
   * You need to input the correct number of manual colours for the number of domains. This is the number of domains you see in the key excluding CDS and UTR (these always have the same colour). If you input the wrong number the plot will not display
+
+  * The shiny.io server does not work currently with large files. So you can't currently run transcript_plotter.py on a whole transcriptome and upload the csv file, it won't work. This can be done locally though
   
   
   * Please let me know if you find any bugs or have any problems (mecoulter@dundee.ac.uk). Enjoy!

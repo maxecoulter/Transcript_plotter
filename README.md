@@ -21,16 +21,13 @@ Single transcripts can be visualised as above. You can visualise SnpEff data on 
 
 
 
-
-
-The tool is currently based around a python script that generates inputs that can be used in a shiny app. 
-The shiny app is found here: https://maxecoulter.shinyapps.io/Transcript_plotter_v2/.
-
 ##Version 3 update
 
 The latest version of the shiny app can be found here: https://maxecoulter.shinyapps.io/Transcript_plotter_v3/. This version takes a bed12 file directly, along with optional InterProScan tsv and SnpEff vcf files. 
 
-It is recommended that you run your transcriptome through transuite (https://github.com/anonconda/TranSuite) to correctly identify ORFs for your transcripts. However, transuite outputs a gtf file, which is not yet compatible with transript_plotter version 3. You can convert your gtf file to a .bed keeping ORF information using the 
+It is recommended that you run your transcriptome through transuite (https://github.com/anonconda/TranSuite) to correctly identify ORFs for your transcripts. However, transuite outputs a gtf file, which is not yet compatible with transript_plotter version 3. You can convert your gtf file to a .bed keeping ORF information using the convert_gtf_to_bed.py. 
+
+Usage: python convert_gtf_to_bed.py -bed <input.gtf> -o output.bed
 
 To run the shiny app, go to https://maxecoulter.shinyapps.io/Transcript_plotter_v3/, and input your bed file, and Interproscan/snpeff files if you wish. It is recommended you select a chromosome and region of interest (if you don't, it will upload the whole transcriptome. This may cause the sever to crash, though it may be fine depending on the size of your transcriptome). Particularly if you are interested in one region, selecting chromosome and position is better. Click the green button "Process files" to view your transcripts. The first window is a browser, where you can see genes and transcripts in their physical context. The second plot is for viewing select transcripts and predicted protein domains. The third window is for viewing individual transcripts with SnpEff data.
 

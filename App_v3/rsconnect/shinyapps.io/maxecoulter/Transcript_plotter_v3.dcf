@@ -1,0 +1,14 @@
+name: Transcript_plotter_v3
+title: Transcript_plotter_v3
+username:
+account: maxecoulter
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5341463
+bundleId: 5385030
+url: https://maxecoulter.shinyapps.io/Transcript_plotter_v3/
+when: 1639756380.866
+lastSyncTime: 1639756380.86602
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: BaRT2v18chr3HG122970.1.bed.csv|gene_models.R|genemodel_input_domain.csv|genemodel_input.csv|snpeff_out.csv|SNPeff_output.tsv

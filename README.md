@@ -21,7 +21,7 @@ Single transcripts can be visualised as above. You can visualise SnpEff data on 
 
 
 
-##Version 3 update
+## Version 3 update
 
 The latest version of the shiny app can be found here: https://maxecoulter.shinyapps.io/Transcript_plotter_v3/. This version takes a bed12 file directly, along with optional InterProScan tsv and SnpEff vcf files. 
 
@@ -37,7 +37,7 @@ You can adjust legend size, plot size, axis text size etc. You can download the 
   
   * If you move on to the next gene the domain key from the previous will still be there. Just switch domains on and off again...
   
-  * Not possible to display snpeff data on transcripts without interpro domains, if you have **genemodel_input_domain.csv** loaded. If you want to do this, restart the app and don't load **genemodel_input_domain.csv**
+  * Not possible to display snpeff data on transcripts without interpro domains, if you have **InterProScan.tsv** loaded. If you want to do this, restart the app and don't load **InterProScan.tsv**
   
   * Everytime you press the domain button, it will change the colours of the domains. This is a quick way of visualising the data. However, if you download the plot it will also change the colours, so they won't be the same. You will need to put the colours in manually in order to make sure they stay the same in your final plot!
   

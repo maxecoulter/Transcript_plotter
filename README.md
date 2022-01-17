@@ -80,9 +80,16 @@ You can adjust legend size, plot size, axis text size etc. You can download the 
   
   * Create the tsv file needed with option **-f tsv**
   
-  * There maybe some domains you do not wish to display. In which case, you can easily adjust the output csv file **genemodel_input_domain.csv**, which feeds into the shiny app
   
  ### **SnpEff vcf file (Optional)**
+ 
+ * You will need a .vcf file as produced by snpeff (see http://pcingola.github.io/SnpEff/) 
+  
+ * Transcript_plotter uses output from version snpeff-5.0-1, it is not tested on later versions
+  
+ * You will need to create a custom SnpEff database if you do not already have one for your transcriptome, in order for your snp annotations to make sense
+  
+ * You will need to filter your vcf file based on quality, otherwise all variants will be displayed (transcript_plotter doesn't do that for you)
 
 
 ## transcript_plotter.py
